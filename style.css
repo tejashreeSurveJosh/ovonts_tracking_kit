@@ -1,0 +1,38 @@
+.button-3 {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    border-radius: 30px;
+  }
+
+  .container{
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-between;
+  }
+
+  .container-1{
+    align-items: center;
+    margin: auto;
+    background: aliceblue;
+  }
+
+  .container-2{
+    align-items: center;
+    margin: auto;
+    background:aliceblue
+  }
+
+  input{
+      background-color: none;
+      width: 600;
+      border-radius: 20px;
+      height: 30px;
+  }
