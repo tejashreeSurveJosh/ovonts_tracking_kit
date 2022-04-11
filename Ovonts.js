@@ -60,6 +60,19 @@ function parseLogin(loginObj) {
   };
 }
 
+function parseSearch(searchObj) {
+  return {
+    category:searchObj?.category,
+    value :searchObj?.value,
+    rating:searchObj?.rating,
+    min_price :searchObj?.min_price,
+    max_price : searchObj?.max_price,
+    brand :searchObj?.brand,
+    discount:searchObj?.discount,
+    offer : searchObj?.offer
+  };
+}
+
 //1
 function productViewed(product) {
   const productDetails = parseProduct(product);
@@ -374,6 +387,33 @@ function Login(loginObj) {
         },
       },
     ]);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function search(search){
+  const searchObj = parseSearch(search)
+  try {
+
+    window.Countly.q.push([
+      "add_event",
+      {
+        key: "Search",
+        segmentation: {
+
+          search_category:searchObj?.category,
+          search_value :searchObj?.value,
+          seach_product_rating:searchObj?.rating,
+          search_min_price :searchObj?.min_price,
+          search_max_price : searchObj?.max_price,
+          search_brand :searchObj?.brand,
+          search_discount:searchObj?.discount,
+          search_offer : searchObj?.offer
+        },
+      },
+    ]);
+    
   } catch (error) {
     console.log(error);
   }

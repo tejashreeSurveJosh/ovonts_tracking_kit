@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ovonts Tracking kit</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         .container {
             display: flex;
@@ -23,12 +22,10 @@
         Countly.q = Countly.q || [];
 
         //provide countly initialization parameters
-        Countly.app_key = '77e205bb74764a121520c89a8628057187620043';
+        Countly.app_key = '2076386204cf057e87154229ef9799c1e7343065';
         Countly.url = 'https://analytics.ovonts.com/';
 
-        Countly.q.push(['track_sessions']);
-        Countly.q.push(['track_pageview']);
-        Countly.q.push(['track_clicks']);
+    
         // Countly.q.push(['track_scrolls']);
 
         //load countly script asynchronously
@@ -247,11 +244,24 @@
 
         const cartId = "123";
         const wishlistId = "1234";
+
+        const searchObj={
+            category:["1","2"],
+            value :["shirt","pants"],
+            rating:["4","5"],
+            min_price:"400",
+            max_price:"1400",
+            brand:["ZARA","Allensoly"],
+            discount:"100",
+            offer:"20"
+        }
     </script>
 </head>
 
 <body>
     <div class="container">
+        <button class="button-3" role="button" onclick="search(searchObj)">
+            search</button><br /><br />
         <button class="button-3" role="button" id="productViewed" onclick="productViewed(product)">
             productViewed</button><br /><br />
         <button class="button-3" role="button" onclick="productAddedToCart(product,cartId)">
