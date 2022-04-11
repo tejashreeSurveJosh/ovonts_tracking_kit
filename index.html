@@ -1,286 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ovonts Tracking kit</title>
     <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            align-content: space-around;
-            justify-content: space-between;
-        }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: space-around;
+        justify-content: space-between;
+      }
     </style>
     <script>
-        // example.com/productID=12345?campaignId=54321&affiliateId=98765
-        //configure the SDK
-        var Countly = Countly || {};
-        Countly.q = Countly.q || [];
-
-        //provide countly initialization parameters
-        Countly.app_key = '2076386204cf057e87154229ef9799c1e7343065';
-        Countly.url = 'https://analytics.ovonts.com/';
-
-    
-        // Countly.q.push(['track_scrolls']);
-
-        //load countly script asynchronously
-        (function () {
-            var cly = document.createElement('script'); cly.type = 'text/javascript';
-            cly.async = true;
-            //enter url of script here
-            cly.src = 'https://cdn.jsdelivr.net/npm/countly-sdk-web@latest/lib/countly.min.js';
-            cly.onload = function () { Countly.init() };
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
-        })();
-
-        var urlParameter = new URLSearchParams(window.location.search);
-        var campaignId, affiliateId;
-        urlParameter.get("campaignId")
-            ? setCampaignId(urlParameter.get("campaignId"))
-            : (campaignId = getCookie("campaignId")
-                ? getCookie("campaignId")
-                : null);
+      // example.com/productID=12345?campaignId=54321&affiliateId=98765
+      //configure the SDK
+      var Countly = Countly || {};
+      Countly.q = Countly.q || [];
+      Countly.app_key = "2076386204cf057e87154229ef9799c1e7343065";
+      Countly.url = "https://analytics.ovonts.com/";
+      !(function () {
+        var o = document.createElement("script");
+        (o.type = "text/javascript"),
+          (o.async = !0),
+          (o.src =
+            "https://cdn.jsdelivr.net/npm/countly-sdk-web@latest/lib/countly.min.js"),
+          (o.onload = function () {
+            Countly.init();
+          });
+        var e = document.getElementsByTagName("script")[0];
+        e.parentNode.insertBefore(o, e);
+      })();
+      var campaignId,
+        affiliateId,
+        urlParameter = new URLSearchParams(window.location.search);
+      function setCampaignId(o) {
+        setCookie("campaignId", (campaignId = o));
+      }
+      function setAffiliateId(o) {
+        setCookie("affiliateId", (affiliateId = o));
+      }
+      function getCookie(o) {
+        var e = ("; " + document.cookie).split("; " + o + "=");
+        if (2 == e.length) return e.pop().split(";").shift();
+      }
+      function setCookie(o, e) {
+        var t = new Date();
+        t.setTime(t.getTime() + 31536e6),
+          (document.cookie = o + "=" + e + ";expires=" + t.toUTCString());
+      }
+      urlParameter.get("campaignId")
+        ? setCampaignId(urlParameter.get("campaignId"))
+        : (campaignId = getCookie("campaignId")
+            ? getCookie("campaignId")
+            : null),
         urlParameter.get("affiliateId")
-            ? setAffiliateId(urlParameter.get("affiliateId"))
-            : (affiliateId = getCookie("affiliateId")
-                ? getCookie("affiliateId")
-                : null);
-        function setCampaignId(cmId) {
-            campaignId = cmId;
-            setCookie("campaignId", campaignId);
-        }
-
-        function setAffiliateId(afId) {
-            affiliateId = afId;
-            setCookie("affiliateId", affiliateId);
-        }
-
-        function getCookie(name) {
-            var value = "; " + document.cookie;
-            var parts = value.split("; " + name + "=");
-            if (parts.length == 2) return parts.pop().split(";").shift();
-        }
-
-        function setCookie(key, value) {
-            var expires = new Date();
-            expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000); //1 year
-            document.cookie =
-                key + "=" + value + ";expires=" + expires.toUTCString();
-        }
-
-        var ovontsUserEmail =
-            ovontsUserMobile =
-            ovontsUserName =
-            ovontsUserDob =
-            ovontsUserFbId =
-            ovontsUserGoogleId =
-            ovontsUserGoogleAdId =
-            ovontsUserHardwareId =
-            null;
-
-        function ovontsSetUserTraits(userObj = null) {
-            userObj?.email
-                ? (setCookie("ovonts.userEmail", userObj.email),
-                    (ovontsUserEmail = userObj.email))
-                : getCookie("ovonts.userEmail")
-                    ? (ovontsUserEmail = getCookie("ovonts.userEmail")) 
-                    : (ovontsUserEmail = null);
-
-            userObj?.mobile_number
-                ? (setCookie("ovonts.userMobile", userObj.mobile_number),
-                    (ovontsUserMobile = userObj.mobile_number))
-                : getCookie("ovonts.userMobile")
-                    ? (ovontsUserMobile = getCookie("ovonts.userMobile"))
-                    : (ovontsUserMobile = null);
-
-            userObj?.name
-                ? (setCookie("ovonts.userName", userObj.name),
-                    (ovontsUserName = userObj.name))
-                : getCookie("ovonts.userName")
-                    ? (ovontsUserName = getCookie("ovonts.userName"))
-                    : (ovontsUserName = null);
-
-            userObj?.dob
-                ? (setCookie("ovonts.userDob", userObj.dob),
-                    (ovontsUserDob = userObj.dob))
-                : getCookie("ovonts.userDob")
-                    ? (ovontsUserDob = getCookie("ovonts.userDob"))
-                    : (ovontsUserDob = null);
-
-            userObj?.fbId
-                ? (setCookie("ovonts.userFbId", userObj.fbId),
-                    (ovontsUserFbId = userObj.fbId))
-                : getCookie("ovonts.userFbId")
-                    ? (ovontsUserFbId = getCookie("ovonts.userFbId"))
-                    : (ovontsUserFbId = null);
-
-            userObj?.google_id
-                ? (setCookie("ovonts.userGoogleId", userObj.google_id),
-                    (ovontsUserGoogleId = userObj.google_id))
-                : getCookie("ovonts.userGoogleId")
-                    ? (ovontsUserGoogleId = getCookie("ovonts.userGoogleId"))
-                    : (ovontsUserGoogleId = null);
-
-            userObj?.googleAdId
-                ? (setCookie("ovonts.userGoogleAdId", userObj.googleAdId),
-                    (ovontsUserGoogleAdId = userObj.googleAdId))
-                : getCookie("ovonts.userGoogleAdId")
-                    ? (ovontsUserGoogleAdId = getCookie("ovonts.userGoogleAdId"))
-                    : (ovontsUserGoogleAdId = null);
-
-            userObj?.hardwareId
-                ? (setCookie("ovonts.userHardwareId", userObj.hardwareId),
-                    (ovontsUserHardwareId = userObj.hardwareId))
-                : getCookie("ovonts.userHardwareId")
-                    ? (ovontsUserHardwareId = getCookie("ovonts.userHardwareId"))
-                    : (ovontsUserHardwareId = null);
-        }
-        ovontsSetUserTraits();
+          ? setAffiliateId(urlParameter.get("affiliateId"))
+          : (affiliateId = getCookie("affiliateId")
+              ? getCookie("affiliateId")
+              : null);
+      var ovontsUserEmail =
+        (ovontsUserMobile =
+        ovontsUserName =
+        ovontsUserDob =
+        ovontsUserFbId =
+        ovontsUserGoogleId =
+        ovontsUserGoogleAdId =
+        ovontsUserHardwareId =
+          null);
+      function ovontsSetUserTraits(o = null) {
+        o?.email
+          ? (setCookie("ovonts.userEmail", o.email),
+            (ovontsUserEmail = o.email))
+          : (ovontsUserEmail = getCookie("ovonts.userEmail")
+              ? getCookie("ovonts.userEmail")
+              : null),
+          o?.mobile_number
+            ? (setCookie("ovonts.userMobile", o.mobile_number),
+              (ovontsUserMobile = o.mobile_number))
+            : getCookie("ovonts.userMobile")
+            ? (ovontsUserMobile = getCookie("ovonts.userMobile"))
+            : (ovontsUserMobile = null),
+          o?.name
+            ? (setCookie("ovonts.userName", o.name), (ovontsUserName = o.name))
+            : getCookie("ovonts.userName")
+            ? (ovontsUserName = getCookie("ovonts.userName"))
+            : (ovontsUserName = null),
+          o?.dob
+            ? (setCookie("ovonts.userDob", o.dob), (ovontsUserDob = o.dob))
+            : getCookie("ovonts.userDob")
+            ? (ovontsUserDob = getCookie("ovonts.userDob"))
+            : (ovontsUserDob = null),
+          o?.fbId
+            ? (setCookie("ovonts.userFbId", o.fbId), (ovontsUserFbId = o.fbId))
+            : getCookie("ovonts.userFbId")
+            ? (ovontsUserFbId = getCookie("ovonts.userFbId"))
+            : (ovontsUserFbId = null),
+          o?.google_id
+            ? (setCookie("ovonts.userGoogleId", o.google_id),
+              (ovontsUserGoogleId = o.google_id))
+            : getCookie("ovonts.userGoogleId")
+            ? (ovontsUserGoogleId = getCookie("ovonts.userGoogleId"))
+            : (ovontsUserGoogleId = null),
+          o?.googleAdId
+            ? (setCookie("ovonts.userGoogleAdId", o.googleAdId),
+              (ovontsUserGoogleAdId = o.googleAdId))
+            : getCookie("ovonts.userGoogleAdId")
+            ? (ovontsUserGoogleAdId = getCookie("ovonts.userGoogleAdId"))
+            : (ovontsUserGoogleAdId = null),
+          o?.hardwareId
+            ? (setCookie("ovonts.userHardwareId", o.hardwareId),
+              (ovontsUserHardwareId = o.hardwareId))
+            : getCookie("ovonts.userHardwareId")
+            ? (ovontsUserHardwareId = getCookie("ovonts.userHardwareId"))
+            : (ovontsUserHardwareId = null);
+      }
+      ovontsSetUserTraits();
     </script>
     <script async src="Ovonts.js"></script>
     <script>
-        const product = {
-            sku: "32864324",
-            title: "Dark yellow lace cut out swing dress",
-            desc: "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus",
-            brand: "ZARA",
-            price: "837.00",
-            offeredPrice: "837.00",
-            currency: "INR",
-            category: {
-                mainCategory: "Apparel",
-                subCategory: "Bottomwear",
-                mainSubCategory: "Jeans",
-            },
-            productUrl:
-                "https ://www.eshakti.com/shop/Jeans/High-waist-ankle-skinny-jeans-CL0090916",
-            quantity: "1",
-            variant: "some variant",
-            color: "Yellow",
-            size: "M"
-        };
+      const product = {
+        sku: "32864324",
+        title: "Dark yellow lace cut out swing dress",
+        desc: "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus",
+        brand: "ZARA",
+        price: "837.00",
+        offeredPrice: "837.00",
+        currency: "INR",
+        category: {
+          mainCategory: "Apparel",
+          subCategory: "Bottomwear",
+          mainSubCategory: "Jeans",
+        },
+        productUrl:
+          "https ://www.eshakti.com/shop/Jeans/High-waist-ankle-skinny-jeans-CL0090916",
+        quantity: "1",
+        variant: "some variant",
+        color: "Yellow",
+        size: "M",
+      };
 
-        const products = [
-            {
-                sku: "32864324",
-                title: "Dark yellow lace cut out swing dress",
-                desc: "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus",
-                brand: "ZARA",
-                price: "837.00",
-                offeredPrice: "837.00",
-                currency: "INR",
-                category: {
-                    mainCategory: "Apparel",
-                    subCategory: "Bottomwear",
-                    mainSubCategory: "Jeans",
-                },
-                productUrl:
-                    "https ://www.eshakti.com/shop/Jeans/High-waist-ankle-skinny-jeans-CL0090916",
-                quantity: "1",
-                variant: "some variant",
-                color: "Yellow",
-                size: "M"
-            },
-            {
-                sku: "32864324",
-                title: "Dark yellow lace cut out swing dress",
-                desc: "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus",
-                brand: "ZARA",
-                price: "837.00",
-                offeredPrice: "837.00",
-                currency: "INR",
-                category: {
-                    mainCategory: "Apparel",
-                    subCategory: "Bottomwear",
-                    mainSubCategory: "Jeans",
-                },
-                productUrl:
-                    "https ://www.eshakti.com/shop/Jeans/High-waist-ankle-skinny-jeans-CL0090916",
-                quantity: "1",
-                variant: "some variant",
-                color: "Yellow",
-                size: "M"
-            },
-        ];
+      const products = [
+        {
+          sku: "32864324",
+          title: "Dark yellow lace cut out swing dress",
+          desc: "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus",
+          brand: "ZARA",
+          price: "837.00",
+          offeredPrice: "837.00",
+          currency: "INR",
+          category: {
+            mainCategory: "Apparel",
+            subCategory: "Bottomwear",
+            mainSubCategory: "Jeans",
+          },
+          productUrl:
+            "https ://www.eshakti.com/shop/Jeans/High-waist-ankle-skinny-jeans-CL0090916",
+          quantity: "1",
+          variant: "some variant",
+          color: "Yellow",
+          size: "M",
+        },
+        {
+          sku: "32864324",
+          title: "Dark yellow lace cut out swing dress",
+          desc: "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus",
+          brand: "ZARA",
+          price: "837.00",
+          offeredPrice: "837.00",
+          currency: "INR",
+          category: {
+            mainCategory: "Apparel",
+            subCategory: "Bottomwear",
+            mainSubCategory: "Jeans",
+          },
+          productUrl:
+            "https ://www.eshakti.com/shop/Jeans/High-waist-ankle-skinny-jeans-CL0090916",
+          quantity: "1",
+          variant: "some variant",
+          color: "Yellow",
+          size: "M",
+        },
+      ];
 
-        const checkoutObj = {
-            cartId: "12",
-            checkoutId: "123",
-            orderId: "12344",
-            totalAamount: "2500",
-            payableAamount: "1800",
-            promoCode: "serddss"
-        };
+      const checkoutObj = {
+        cartId: "12",
+        checkoutId: "123",
+        orderId: "12344",
+        totalAamount: "2500",
+        payableAamount: "1800",
+        promoCode: "serddss",
+      };
 
-        const orderObj = {
-            orderId: "A1001",
-            grossAmount: "4000",
-            taxableAmount: "400",
-            payableAmount: "400",
-            totalAmount: "4400",
-            transactionId: "U10001",
-            offerId: "100001",
-            promoApplied: "OFF400"
-        };
+      const orderObj = {
+        orderId: "A1001",
+        grossAmount: "4000",
+        taxableAmount: "400",
+        payableAmount: "400",
+        totalAmount: "4400",
+        transactionId: "U10001",
+        offerId: "100001",
+        promoApplied: "OFF400",
+      };
 
-        const registerObj = {
-            email: "subas@gmail.com",
-            phone: "9022813986",
-            name: "subas",
-            age: "24",
-            dob: "21/07/1997"
-        };
+      const registerObj = {
+        email: "subas@gmail.com",
+        phone: "9022813986",
+        name: "subas",
+        age: "24",
+        dob: "21/07/1997",
+      };
 
-        const loginObj = {
-            id: "subas123",
-            phone: "9022",
-            name: "subhu"
-        }
+      const loginObj = {
+        id: "subas123",
+        phone: "9022",
+        name: "subhu",
+      };
 
-        const cartId = "123";
-        const wishlistId = "1234";
+      const cartId = "123";
+      const wishlistId = "1234";
 
-        const searchObj={
-            category:["1","2"],
-            value :["shirt","pants"],
-            rating:["4","5"],
-            min_price:"400",
-            max_price:"1400",
-            brand:["ZARA","Allensoly"],
-            discount:"100",
-            offer:"20"
-        }
+      const searchObj = {
+        category: ["1", "2"],
+        value: ["shirt", "pants"],
+        rating: ["4", "5"],
+        min_price: "400",
+        max_price: "1400",
+        brand: ["ZARA", "Allensoly"],
+        discount: "100",
+        offer: "20",
+      };
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <button class="button-3" role="button" onclick="search(searchObj)">
-            search</button><br /><br />
-        <button class="button-3" role="button" id="productViewed" onclick="productViewed(product)">
-            productViewed</button><br /><br />
-        <button class="button-3" role="button" onclick="productAddedToCart(product,cartId)">
-            productAddedToCart</button><br /><br />
-        <button class="button-3" role="button" onclick="productAddedToWishlist(wishlistId,product)">
-            productAddedToWishlist</button><br /><br />
-        <button class="button-3" role="button" onclick="cartViewed(product,cartId)">
-            cartViewed</button><br /><br />
-        <button class="button-3" role="button" onclick="orderPlaced(products,orderObj)">
-            orderPlaced</button><br /><br />
-        <button class="button-3" role="button" onclick="checkoutStarted(products,checkoutObj)">
-            checkoutStarted</button><br /><br />
-        <button class="button-3" role="button" onclick="productRemovedFromCart(cartId)">
-            productRemovedFromCart</button><br /><br />
-        <button class="button-3" role="button" onclick="Register(registerObj)">
-            Register</button><br /><br />
-        <button class="button-3" role="button" onclick="Login(loginObj)">
-            Login</button><br /><br />
-    </div>
-</body>
+      <div class="container-1">
+        <div>
+          <input type="text" id="campaignId" />
+          <button onclick="handleTraitChange('campaignId')" class="button-3">
+            campaignId
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="affiliateId" />
+          <button onclick="handleTraitChange('affiliateId')" class="button-3">
+            affiliateId
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="email" />
+          <button
+            onclick="handleTraitChange('email')"
+            id="btn-email"
+            class="button-3"
+          >
+            Email
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="phone" />
+          <button
+            onclick="handleTraitChange('mobile_number')"
+            id="btn-phone"
+            class="button-3"
+          >
+            phone
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="name" />
+          <button
+            onclick="handleTraitChange('name')"
+            id="btn-name"
+            class="button-3"
+          >
+            Name
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="date" id="dob" />
+          <button
+            onclick="handleTraitChange('dob')"
+            id="btn-dob"
+            class="button-3"
+          >
+            Dob
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="fid" />
+          <button
+            onclick="handleTraitChange('fbId')"
+            id="btn-fid"
+            class="button-3"
+          >
+            FbId
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="gid" />
+          <button
+            onclick="handleTraitChange('google_id')"
+            id="btn-gid"
+            class="button-3"
+          >
+            GoogleId
+          </button>
+          <br />
+        </div>
+        <div>
+          <input type="text" id="hid" />
+          <button
+            onclick="handleTraitChange('hardwareId')"
+            id="btn-hid"
+            class="button-3"
+          >
+            hardwareId
+          </button>
+        </div>
+      </div>
 
+      <button class="button-3" role="button" onclick="search(searchObj)">
+        search</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        id="productViewed"
+        onclick="productViewed(product)"
+      >
+        productViewed</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        onclick="productAddedToCart(product,cartId)"
+      >
+        productAddedToCart</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        onclick="productAddedToWishlist(wishlistId,product)"
+      >
+        productAddedToWishlist</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        onclick="cartViewed(product,cartId)"
+      >
+        cartViewed</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        onclick="orderPlaced(products,orderObj)"
+      >
+        orderPlaced</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        onclick="checkoutStarted(products,checkoutObj)"
+      >
+        checkoutStarted</button
+      ><br /><br />
+      <button
+        class="button-3"
+        role="button"
+        onclick="productRemovedFromCart(cartId)"
+      >
+        productRemovedFromCart</button
+      ><br /><br />
+      <button class="button-3" role="button" onclick="Register(registerObj)">
+        Register</button
+      ><br /><br />
+      <button class="button-3" role="button" onclick="Login(loginObj)">
+        Login</button
+      ><br /><br />
+    </div>
+  </body>
 </html>

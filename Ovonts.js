@@ -62,14 +62,14 @@ function parseLogin(loginObj) {
 
 function parseSearch(searchObj) {
   return {
-    category:searchObj?.category,
-    value :searchObj?.value,
-    rating:searchObj?.rating,
-    min_price :searchObj?.min_price,
-    max_price : searchObj?.max_price,
-    brand :searchObj?.brand,
-    discount:searchObj?.discount,
-    offer : searchObj?.offer
+    category: searchObj?.category,
+    value: searchObj?.value,
+    rating: searchObj?.rating,
+    min_price: searchObj?.min_price,
+    max_price: searchObj?.max_price,
+    brand: searchObj?.brand,
+    discount: searchObj?.discount,
+    offer: searchObj?.offer,
   };
 }
 
@@ -106,7 +106,7 @@ function productViewed(product) {
           product_subCategory2: productDetails?.product_subCategory2,
           product_title: productDetails?.product_product_title,
           product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant
+          product_variant: productDetails?.product_variant,
         },
       },
     ]);
@@ -148,7 +148,7 @@ function productAddedToCart(product, cartId = null) {
           product_subCategory2: productDetails?.product_subCategory2,
           product_title: productDetails?.product_product_title,
           product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant
+          product_variant: productDetails?.product_variant,
         },
       },
     ]);
@@ -190,7 +190,7 @@ function productAddedToWishlist(wishlistId = null, product) {
           product_subCategory2: productDetails?.product_subCategory2,
           product_title: productDetails?.product_product_title,
           product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant
+          product_variant: productDetails?.product_variant,
         },
       },
     ]);
@@ -232,7 +232,7 @@ function cartViewed(product, cartId = null) {
           product_subCategory2: productDetails?.product_subCategory2,
           product_title: productDetails?.product_product_title,
           product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant
+          product_variant: productDetails?.product_variant,
         },
       },
     ]);
@@ -242,14 +242,14 @@ function cartViewed(product, cartId = null) {
 }
 //5
 function orderPlaced(products, orderObj) {
-  let parsedProduct = [],
-    productsStringified;
+  // let parsedProduct = [],
+  //   productsStringified;
   let order = parseOrder(orderObj);
   try {
-    products.map((p) => {
-      parsedProduct.push(parseProduct(p));
-    });
-    productsStringified = JSON.stringify(parsedProduct);
+    // products.map((p) => {
+    //   parsedProduct.push(parseProduct(p));
+    // });
+    // productsStringified = JSON.stringify(parsedProduct);
     window.Countly.q.push([
       "add_event",
       {
@@ -284,13 +284,13 @@ function orderPlaced(products, orderObj) {
 //6
 function checkoutStarted(products_array, chekoutObj) {
   const checkout = parseCheckout(chekoutObj);
-  let parsedProduct = [],
-    productsStringified;
+  // let parsedProduct = [],
+  //   productsStringified;
   try {
-    products.map((p) => {
-      parsedProduct.push(parseProduct(p));
-    });
-    productsStringified = JSON.stringify(parsedProduct);
+    // products.map((p) => {
+    //   parsedProduct.push(parseProduct(p));
+    // });
+    // productsStringified = JSON.stringify(parsedProduct);
     window.Countly.q.push([
       "add_event",
       {
@@ -392,28 +392,25 @@ function Login(loginObj) {
   }
 }
 
-function search(search){
-  const searchObj = parseSearch(search)
+function search(search) {
+  const searchObj = parseSearch(search);
   try {
-
     window.Countly.q.push([
       "add_event",
       {
         key: "Search",
         segmentation: {
-
-          search_category:searchObj?.category,
-          search_value :searchObj?.value,
-          seach_product_rating:searchObj?.rating,
-          search_min_price :searchObj?.min_price,
-          search_max_price : searchObj?.max_price,
-          search_brand :searchObj?.brand,
-          search_discount:searchObj?.discount,
-          search_offer : searchObj?.offer
+          search_category: searchObj?.category,
+          search_value: searchObj?.value,
+          seach_product_rating: searchObj?.rating,
+          search_min_price: searchObj?.min_price,
+          search_max_price: searchObj?.max_price,
+          search_brand: searchObj?.brand,
+          search_discount: searchObj?.discount,
+          search_offer: searchObj?.offer,
         },
       },
     ]);
-    
   } catch (error) {
     console.log(error);
   }
