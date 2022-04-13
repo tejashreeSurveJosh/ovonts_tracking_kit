@@ -273,7 +273,7 @@ function orderPlaced(products, orderObj) {
           transactionId: order.transactionId,
           offerId: order.offerId,
           promoApplied: order.promoApplied,
-          products: productsStringified,
+          products: products,
         },
       },
     ]);
@@ -282,7 +282,7 @@ function orderPlaced(products, orderObj) {
   }
 }
 //6
-function checkoutStarted(products_array, chekoutObj) {
+function checkoutStarted(products, chekoutObj) {
   const checkout = parseCheckout(chekoutObj);
   // let parsedProduct = [],
   //   productsStringified;
@@ -312,7 +312,7 @@ function checkoutStarted(products_array, chekoutObj) {
           totalAmount: checkout?.total_amount,
           payableAamount: checkout?.payable_amount,
           promoCode: checkout?.promoCode,
-          products: productsStringified,
+          products: products,
         },
       },
     ]);
