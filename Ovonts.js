@@ -350,6 +350,8 @@ function productRemovedFromCart(cartId = null) {
 //8
 function Register(registerObj) {
   const registerObject = parseRegister(registerObj);
+  ovontsSetUserTraits(registerObj);
+
   try {
     window.Countly.q.push([
       "add_event",
@@ -358,11 +360,11 @@ function Register(registerObj) {
         segmentation: {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
-          userEmail: registerObject?.userEmail,
-          userPhone: registerObject?.userPhone,
-          userName: registerObject?.userName,
+          userEmail: window.ovontsUserEmail,
+          userPhone: window.ovontsUserMobile,
+          userName: window.ovontsUserName,
           userAge: registerObject?.userAge,
-          userDob: registerObject?.userDob,
+          userDob: window.ovontsUserDob,
         },
       },
     ]);
@@ -373,6 +375,7 @@ function Register(registerObj) {
 //9
 function Login(loginObj) {
   const loginObject = parseLogin(loginObj);
+  ovontsSetUserTraits(loginObj);
   try {
     window.Countly.q.push([
       "add_event",
@@ -382,8 +385,8 @@ function Login(loginObj) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           userId: loginObject?.userId,
-          userName: loginObject?.userName,
-          userPhone: loginObject?.userPhone,
+          userName: window.ovontsUserName,
+          userPhone: window.ovontsUserMobile,
         },
       },
     ]);
