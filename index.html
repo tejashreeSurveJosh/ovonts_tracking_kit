@@ -146,8 +146,7 @@
         var date1 = new Date(date);
         const unixTimestamp = Math.floor(date1.getTime() / 1000);
         window.ovontsSetUserTraits({
-          // dob: `${document.getElementById("dob").value}`,
-          dob:unixTimestamp
+          dob: unixTimestamp
         });
       }
       if (action == "fbId") {
@@ -284,7 +283,8 @@
 </head>
 
 <body>
-    <div class="form1">
+  <div class="main">
+    <div class="div1">
       <div class="mb-3" id="">
         <button class="btn btn-success" role="button" id="button" onclick="search(searchObj)">
           search</button><br /><br />
@@ -326,7 +326,7 @@
           Login</button><br /><br />
       </div>
     </div>
-    <div class="form2">
+    <div class="div2">
       <!-- <div class="mb-3" id="">
         <label for="" class="form-label">CampaignId</label>
         <input type="text" class="form-control" id="campaignId" aria-describedby=""/>
@@ -341,63 +341,65 @@
           Set
         </button>
       </div> -->
+      <div>
+        <div class="mb-3">
+          <label for="" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" />
+          <button type="submit" onclick="handleTraitChange('email')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
 
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" />
-        <button type="submit" onclick="handleTraitChange('email')" role="button" class="btn btn-primary">
-          Set
-        </button>
-      </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Phone:</label>
+          <input type="number" class="form-control" id="phone" />
+          <button type="submit" onclick="handleTraitChange('mobile_number')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
 
-      <div class="mb-3">
-        <label for="" class="form-label">Phone:</label>
-        <input type="number" class="form-control" id="phone" />
-        <button type="submit" onclick="handleTraitChange('mobile_number')" role="button" class="btn btn-primary">
-          Set
-        </button>
-      </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" />
+          <button type="submit" onclick="handleTraitChange('name')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
 
-      <div class="mb-3">
-        <label for="" class="form-label">Name:</label>
-        <input type="text" class="form-control" id="name" />
-        <button type="submit" onclick="handleTraitChange('name')" role="button" class="btn btn-primary">
-          Set
-        </button>
-      </div>
+        <div class="mb-3">
+          <label for="" class="form-label">DOB:</label>
+          <input type="date" class="form-control" id="dob" />
+          <button type="submit" onclick="handleTraitChange('dob')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
 
-      <div class="mb-3">
-        <label for="" class="form-label">DOB:</label>
-        <input type="date" class="form-control" id="dob"/>
-        <button type="submit" onclick="handleTraitChange('dob')" role="button" class="btn btn-primary">
-          Set
-        </button>
-      </div>
+        <div class="mb-3">
+          <label for="" class="form-label">FbId:</label>
+          <input type="text" class="form-control" id="fid" />
+          <button type="submit" onclick="handleTraitChange('fbId')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
 
-      <div class="mb-3">
-        <label for="" class="form-label">FbId:</label>
-        <input type="text" class="form-control" id="fid" />
-        <button type="submit" onclick="handleTraitChange('fbId')" role="button" class="btn btn-primary">
-          Set
-        </button>
-      </div>
+        <div class="mb-3">
+          <label for="" class="form-label">GoogleId:</label>
+          <input type="text" class="form-control" id="gid" />
+          <button type="submit" onclick="handleTraitChange('google_id')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
 
-      <div class="mb-3">
-        <label for="" class="form-label">GoogleId:</label>
-        <input type="text" class="form-control" id="gid" />
-        <button type="submit" onclick="handleTraitChange('google_id')" role="button" class="btn btn-primary">
-          Set
-        </button>
-      </div>
-
-      <div class="mb-3">
-        <label for="" class="form-label">HardwareId:</label>
-        <input type="text" class="form-control" id="hid" />
-        <button type="submit" onclick="handleTraitChange('hardwareId')" role="button" class="btn btn-primary">
-          Set
-        </button>
+        <div class="mb-3">
+          <label for="" class="form-label">HardwareId:</label>
+          <input type="text" class="form-control" id="hid" />
+          <button type="submit" onclick="handleTraitChange('hardwareId')" role="button" class="btn btn-primary">
+            Set
+          </button>
+        </div>
       </div>
     </div>
+  </div>
 </body>
 
 </html>
