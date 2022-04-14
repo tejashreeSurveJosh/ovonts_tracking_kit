@@ -1,20 +1,20 @@
 function parseProduct(product) {
   return {
-    product_sku: product?.sku,
-    product_product_title: product?.title,
-    product_product_desc: product?.desc,
-    product_brand: product?.brand,
-    product_price: product?.price,
-    product_offered_price: product?.offeredPrice,
-    product_currency: product?.currency,
-    product_mainCategory: product?.category?.mainCategory,
-    product_subCategory1: product?.category?.subCategory,
-    product_subCategory2: product?.category?.mainSubCategory,
-    product_url: product?.productUrl,
-    product_quantity: product?.quantity,
-    product_variant: product?.variant,
-    product_color: product?.color,
-    product_size: product?.size,
+    sku: product?.sku,
+    title: product?.title,
+    desc: product?.desc,
+    brand: product?.brand,
+    price: product?.price,
+    offered_price: product?.offeredPrice,
+    currency: product?.currency,
+    mainCategory: product?.category?.mainCategory,
+    subCategory1: product?.category?.subCategory,
+    subCategory2: product?.category?.mainSubCategory,
+    url: product?.productUrl,
+    quantity: product?.quantity,
+    variant: product?.variant,
+    color: product?.color,
+    size: product?.size,
   };
 }
 
@@ -92,21 +92,22 @@ function productViewed(product) {
           userHardwareId: window.ovontsUserHardwareId,
           affiliateId: window.affiliateId,
           campaignId: window.campaignId,
-          product_brand: productDetails?.product_brand,
-          product_color: productDetails?.product_color,
-          product_currency: productDetails?.product_currency,
-          product_desc: productDetails?.product_product_desc,
-          product_mainCategory: productDetails?.product_mainCategory,
-          product_offeredPrice: productDetails?.product_offered_price,
-          product_price: productDetails?.product_price,
-          product_quantity: productDetails?.product_quantity,
-          product_size: productDetails?.product_size,
-          product_sku: productDetails?.product_sku,
-          product_subCategory1: productDetails?.product_subCategory1,
-          product_subCategory2: productDetails?.product_subCategory2,
-          product_title: productDetails?.product_product_title,
-          product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant,
+          products :productDetails
+          // product_brand: productDetails?.product_brand,
+          // product_color: productDetails?.product_color,
+          // product_currency: productDetails?.product_currency,
+          // product_desc: productDetails?.product_product_desc,
+          // product_mainCategory: productDetails?.product_mainCategory,
+          // product_offeredPrice: productDetails?.product_offered_price,
+          // product_price: productDetails?.product_price,
+          // product_quantity: productDetails?.product_quantity,
+          // product_size: productDetails?.product_size,
+          // product_sku: productDetails?.product_sku,
+          // product_subCategory1: productDetails?.product_subCategory1,
+          // product_subCategory2: productDetails?.product_subCategory2,
+          // product_title: productDetails?.product_product_title,
+          // product_url: productDetails?.product_url,
+          // product_variant: productDetails?.product_variant,
         },
       },
     ]);
@@ -134,21 +135,7 @@ function productAddedToCart(product, cartId = null) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           cartId: cartId,
-          product_brand: productDetails?.product_brand,
-          product_color: productDetails?.product_color,
-          product_currency: productDetails?.product_currency,
-          product_desc: productDetails?.product_product_desc,
-          product_mainCategory: productDetails?.product_mainCategory,
-          product_offeredPrice: productDetails?.product_offered_price,
-          product_price: productDetails?.product_price,
-          product_quantity: productDetails?.product_quantity,
-          product_size: productDetails?.product_size,
-          product_sku: productDetails?.product_sku,
-          product_subCategory1: productDetails?.product_subCategory1,
-          product_subCategory2: productDetails?.product_subCategory2,
-          product_title: productDetails?.product_product_title,
-          product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant,
+          products:productDetails
         },
       },
     ]);
@@ -176,21 +163,7 @@ function productAddedToWishlist(wishlistId = null, product) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           wishlistId: wishlistId,
-          product_brand: productDetails?.product_brand,
-          product_color: productDetails?.product_color,
-          product_currency: productDetails?.product_currency,
-          product_desc: productDetails?.product_product_desc,
-          product_mainCategory: productDetails?.product_mainCategory,
-          product_offeredPrice: productDetails?.product_offered_price,
-          product_price: productDetails?.product_price,
-          product_quantity: productDetails?.product_quantity,
-          product_size: productDetails?.product_size,
-          product_sku: productDetails?.product_sku,
-          product_subCategory1: productDetails?.product_subCategory1,
-          product_subCategory2: productDetails?.product_subCategory2,
-          product_title: productDetails?.product_product_title,
-          product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant,
+          products:productDetails
         },
       },
     ]);
@@ -218,21 +191,7 @@ function cartViewed(product, cartId = null) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           cartId: cartId,
-          product_brand: productDetails?.product_brand,
-          product_color: productDetails?.product_color,
-          product_currency: productDetails?.product_currency,
-          product_desc: productDetails?.product_product_desc,
-          product_mainCategory: productDetails?.product_mainCategory,
-          product_offeredPrice: productDetails?.product_offered_price,
-          product_price: productDetails?.product_price,
-          product_quantity: productDetails?.product_quantity,
-          product_size: productDetails?.product_size,
-          product_sku: productDetails?.product_sku,
-          product_subCategory1: productDetails?.product_subCategory1,
-          product_subCategory2: productDetails?.product_subCategory2,
-          product_title: productDetails?.product_product_title,
-          product_url: productDetails?.product_url,
-          product_variant: productDetails?.product_variant,
+          products:productDetails
         },
       },
     ]);
@@ -242,14 +201,12 @@ function cartViewed(product, cartId = null) {
 }
 //5
 function orderPlaced(products, orderObj) {
-  // let parsedProduct = [],
-  //   productsStringified;
+  let parsedProduct = [];
   let order = parseOrder(orderObj);
   try {
-    // products.map((p) => {
-    //   parsedProduct.push(parseProduct(p));
-    // });
-    // productsStringified = JSON.stringify(parsedProduct);
+    products.map((p) => {
+      parsedProduct.push(parseProduct(p));
+    });
     window.Countly.q.push([
       "add_event",
       {
@@ -273,7 +230,7 @@ function orderPlaced(products, orderObj) {
           transactionId: order.transactionId,
           offerId: order.offerId,
           promoApplied: order.promoApplied,
-          products: products,
+          products: parsedProduct,
         },
       },
     ]);
@@ -284,13 +241,11 @@ function orderPlaced(products, orderObj) {
 //6
 function checkoutStarted(products, chekoutObj) {
   const checkout = parseCheckout(chekoutObj);
-  // let parsedProduct = [],
-  //   productsStringified;
+  let parsedProduct = [];
   try {
-    // products.map((p) => {
-    //   parsedProduct.push(parseProduct(p));
-    // });
-    // productsStringified = JSON.stringify(parsedProduct);
+    products.map((p) => {
+      parsedProduct.push(parseProduct(p));
+    });
     window.Countly.q.push([
       "add_event",
       {
@@ -312,7 +267,7 @@ function checkoutStarted(products, chekoutObj) {
           totalAmount: checkout?.total_amount,
           payableAamount: checkout?.payable_amount,
           promoCode: checkout?.promoCode,
-          products: products,
+          products: parsedProduct,
         },
       },
     ]);
