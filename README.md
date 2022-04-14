@@ -178,7 +178,7 @@ Event Functions :
 
     }
 
-7)checkoutStarted(product_array, checkoutObj
+7)checkoutStarted(product_array, checkoutObj)
     {
             //set the properties of product_array object
             //set the properties of checkoutObj object
