@@ -311,7 +311,7 @@ function Register(registerObj) {
     window.Countly.q.push([
       "add_event",
       {
-        key: "Register",
+        key: "register",
         segmentation: {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
@@ -335,7 +335,7 @@ function Login(loginObj) {
     window.Countly.q.push([
       "add_event",
       {
-        key: "Login",
+        key: "login",
         segmentation: {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
@@ -356,7 +356,7 @@ function search(search) {
     window.Countly.q.push([
       "add_event",
       {
-        key: "Search",
+        key: "search",
         segmentation: {
           search_category: searchObj?.category,
           search_value: searchObj?.value,
