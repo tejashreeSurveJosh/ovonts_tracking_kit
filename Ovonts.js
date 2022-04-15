@@ -92,7 +92,7 @@ function productViewed(product) {
           userHardwareId: window.ovontsUserHardwareId,
           affiliateId: window.affiliateId,
           campaignId: window.campaignId,
-          products :productDetails
+          products: [productDetails],
         },
       },
     ]);
@@ -120,7 +120,7 @@ function productAddedToCart(product, cartId = null) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           cartId: cartId,
-          products:productDetails
+          products: [productDetails],
         },
       },
     ]);
@@ -148,7 +148,7 @@ function productAddedToWishlist(wishlistId = null, product) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           wishlistId: wishlistId,
-          products:productDetails
+          products: [productDetails],
         },
       },
     ]);
@@ -176,7 +176,7 @@ function cartViewed(product, cartId = null) {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
           cartId: cartId,
-          products:productDetails
+          products: [productDetails],
         },
       },
     ]);
@@ -215,7 +215,7 @@ function orderPlaced(products, orderObj) {
           transactionId: order.transactionId,
           offerId: order.offerId,
           promoApplied: order.promoApplied,
-          products: parsedProduct,
+          products: [parsedProduct],
         },
       },
     ]);
@@ -252,7 +252,7 @@ function checkoutStarted(products, chekoutObj) {
           totalAmount: checkout?.total_amount,
           payableAamount: checkout?.payable_amount,
           promoCode: checkout?.promoCode,
-          products: parsedProduct,
+          products: [parsedProduct],
         },
       },
     ]);
