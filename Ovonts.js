@@ -93,21 +93,6 @@ function productViewed(product) {
           affiliateId: window.affiliateId,
           campaignId: window.campaignId,
           products :productDetails
-          // product_brand: productDetails?.product_brand,
-          // product_color: productDetails?.product_color,
-          // product_currency: productDetails?.product_currency,
-          // product_desc: productDetails?.product_product_desc,
-          // product_mainCategory: productDetails?.product_mainCategory,
-          // product_offeredPrice: productDetails?.product_offered_price,
-          // product_price: productDetails?.product_price,
-          // product_quantity: productDetails?.product_quantity,
-          // product_size: productDetails?.product_size,
-          // product_sku: productDetails?.product_sku,
-          // product_subCategory1: productDetails?.product_subCategory1,
-          // product_subCategory2: productDetails?.product_subCategory2,
-          // product_title: productDetails?.product_product_title,
-          // product_url: productDetails?.product_url,
-          // product_variant: productDetails?.product_variant,
         },
       },
     ]);
@@ -303,7 +288,7 @@ function productRemovedFromCart(cartId = null) {
 }
 
 //8
-function Register(registerObj) {
+function register(registerObj) {
   const registerObject = parseRegister(registerObj);
   ovontsSetUserTraits(registerObj);
 
@@ -328,7 +313,7 @@ function Register(registerObj) {
   }
 }
 //9
-function Login(loginObj) {
+function login(loginObj) {
   const loginObject = parseLogin(loginObj);
   ovontsSetUserTraits(loginObj);
   try {
