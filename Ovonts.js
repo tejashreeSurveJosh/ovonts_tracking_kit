@@ -62,12 +62,12 @@ function parseLogin(loginObj) {
 
 function parseSearch(searchObj) {
   return {
-    category: searchObj?.category,
+    categories: searchObj?.categories,
     value: searchObj?.value,
     rating: searchObj?.rating,
     min_price: searchObj?.min_price,
     max_price: searchObj?.max_price,
-    brand: searchObj?.brand,
+    brands: searchObj?.brands,
     discount: searchObj?.discount,
     offer: searchObj?.offer,
   };
@@ -289,7 +289,6 @@ function productRemovedFromCart(cartId = null) {
 
 //8
 function register(registerObj) {
-  const registerObject = parseRegister(registerObj);
   ovontsSetUserTraits(registerObj);
 
   try {
@@ -303,7 +302,7 @@ function register(registerObj) {
           userEmail: window.ovontsUserEmail,
           userPhone: window.ovontsUserMobile,
           userName: window.ovontsUserName,
-          userAge: registerObject?.userAge,
+          userAge: window.ovontsUserAge,
           userDob: window.ovontsUserDob,
         },
       },
@@ -326,9 +325,9 @@ function login(loginObj) {
           affiliateId: window.affiliateId,
           userId: loginObject?.userId,
           userName: window.ovontsUserName,
-          userPhone: window.ovontsUserMobile,
-          userAge: window.ovontsUserAge,
-          userDob: window.ovontsUserDob,
+          userPhone: window.ovontsUserMobile, 
+          userAge: window.ovontsUserAge, 
+          userDob: window.ovontsUserDob, 
         },
       },
     ]);
@@ -347,12 +346,12 @@ function search(search) {
         segmentation: {
           campaignId: window.campaignId,
           affiliateId: window.affiliateId,
-          search_category: searchObj?.category,
+          search_categories: searchObj?.categories,
           search_value: searchObj?.value,
           seach_product_rating: searchObj?.rating,
           search_min_price: searchObj?.min_price,
           search_max_price: searchObj?.max_price,
-          search_brand: searchObj?.brand,
+          search_brands: searchObj?.brands,
           search_discount: searchObj?.discount,
           search_offer: searchObj?.offer,
         },
