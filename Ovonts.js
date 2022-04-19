@@ -327,6 +327,8 @@ function login(loginObj) {
           userId: loginObject?.userId,
           userName: window.ovontsUserName,
           userPhone: window.ovontsUserMobile,
+          userAge: window.ovontsUserAge,
+          userDob: window.ovontsUserDob,
         },
       },
     ]);
@@ -343,6 +345,8 @@ function search(search) {
       {
         key: "search",
         segmentation: {
+          campaignId: window.campaignId,
+          affiliateId: window.affiliateId,
           search_category: searchObj?.category,
           search_value: searchObj?.value,
           seach_product_rating: searchObj?.rating,
