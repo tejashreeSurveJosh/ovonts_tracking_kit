@@ -23,8 +23,8 @@
       //configure the SDK
       var Countly = Countly || {};
       Countly.q = Countly.q || [];
-      Countly.app_key = "95e0ac9e98f517c42de2ef184a98f2156124c14a";
-      Countly.url = "https://analytics.ovonts.com/";
+      Countly.app_key = "4c37061b8f300f8ff238b974e4c3fab4159bb301";
+      Countly.url = "https://dev.analytics.ovonts.com";
 
       Countly.q.push(["track_sessions"]);
       // Countly.q.push(['track_pageview']);
@@ -130,6 +130,18 @@
 
       //handleTraitChange Function
       function handleTraitChange(action) {
+        if (action == "campaignId") {
+          let campaignId = document.getElementById("campaignId").value;
+          window.campaignId = campaignId;
+          setCampaignId(campaignId);
+        }
+
+        if (action == "affiliateId") {
+          let affiliateId = document.getElementById("affiliateId").value;
+          window.affiliateId = affiliateId;
+          setAffiliateId(affiliateId);
+        }
+
         if (action == "email") {
           window.ovontsSetUserTraits({
             email: `${document.getElementById("email").value}`,
@@ -406,6 +418,32 @@
         </button>
       </div> -->
         <div>
+          <div class="mb-3">
+            <label for="" class="form-label">CampaignId:</label>
+            <input type="text" class="form-control" id="campaignId" />
+            <button
+              type="submit"
+              onclick="handleTraitChange('campaignId')"
+              role="button"
+              class="btn btn-primary"
+            >
+              Set
+            </button>
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label">AffiliatedId:</label>
+            <input type="text" class="form-control" id="affiliateId" />
+            <button
+              type="submit"
+              onclick="handleTraitChange('affiliateId')"
+              role="button"
+              class="btn btn-primary"
+            >
+              Set
+            </button>
+          </div>
+
           <div class="mb-3">
             <label for="" class="form-label">Email:</label>
             <input type="email" class="form-control" id="email" />
